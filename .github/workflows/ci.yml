@@ -1,0 +1,26 @@
+﻿# Automated Continuous Integration YAML Workflow Configuration
+name: Python Continuous Integration Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository Source Code
+        uses: actions/checkout@v4
+
+      - name: Configure Python 3.12 Runtime Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies & Execute Automated Tests
+        run: |
+          python -m pip install --upgrade pip
+          python calc.py
